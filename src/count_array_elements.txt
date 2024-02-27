@@ -1,0 +1,17 @@
+const arr = [
+    { name:'test0', active: false, last_login: null },
+    { name:'test1', active: true, last_login: 'today' },
+    { name:'test2', active: true, last_login: 'tomorrow' },
+    { name:'test3', active: false, last_login: 'last_week' },
+    { name:'test4', active: false, last_login: null },
+    { name:'test5', active: true, last_login: 'yesterday' },
+    { name:'test6', active: false, last_login: null },
+    { name:'test7', active: false, last_login: 'next_month' },
+    { name:'test8', active: false, last_login: null }
+];
+
+var passCount = Object.keys(arr).filter(function(key){
+   return ( arr[key].last_login === null || arr[key].active === true );
+}).length;
+
+console.log(passCount);
