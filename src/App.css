@@ -63,3 +63,38 @@ h2{
 .img-good-bad{
   width: 22px;
 }
+
+/* Aquí empiezan los estilos personalizados */
+.app-content {
+  padding: 10px;
+  background-color: transparent;
+}
+
+.bg-navbar-color {
+  background-color: #c9cbcc;
+}
+
+.navbar-dark .navbar-nav .dropdown-item:hover {
+  background-color: #e5e6e7;
+}
+
+.nav-link {
+  color: black;
+}
+
+.logo {
+  margin: none;
+  width: 220px;
+}
+
+.text-h1, .text-h2 {
+  color: #444750;
+}
+
+table.table tr th {
+  color: #4d4d4d;
+}
+
+.container {
+  padding-top:20px;
+}
