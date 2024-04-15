@@ -13,6 +13,8 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import Checkbox from "./Checkbox";
 import BikeForm from "./BikeForm";
 
+import Menu from "../Components/Menu";
+
 const Home = () => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -186,14 +188,68 @@ function clickHandler(user) {
 
 console.log(data);
 
-if( data[1].active ){
+if( !data[1].active ){
     return <Navigate to="/login" state={{id: 12}} />;
 }
+
+const menu = [
+    {
+        label: 'Service',
+        to: ''
+    },
+    {
+        label: 'Bikes',
+        submenu: [
+            {
+                label: 'View all',
+                to: '',
+            },
+            {
+                label: 'Add new bike',
+                to: '',
+            },
+        ]
+    },
+    {
+        label: 'Models',
+        submenu: [
+            {
+                label: 'View all',
+                to: ''
+            },
+            {
+                label: 'New Model',
+                to: ''
+            }
+        ]
+    },
+    {
+        label: 'Components',
+        submenu: [
+            {
+                label: 'View all',
+                to: ''
+            },
+            {
+                label: 'New Drive Unit',
+                to: ''
+            },
+            {
+                label: 'New HMI',
+                to: ''
+            },
+            {
+                label: 'New Battery',
+                to: ''
+            }
+        ]
+    }
+];
 
 return (
     <div className="container">
 
-        <Navbar bg="" variant="light">
+        {/* <Navbar bg="" variant="light">
             <Nav className="container-fluid">
                 <Nav.Item>
                         <h1>{data[0].Plant__r.Name}</h1>
@@ -204,7 +260,9 @@ return (
                     </Navbar.Brand>
                 </Nav.Item>
             </Nav>
-        </Navbar>
+        </Navbar> */}
+
+        <Menu menuItems={menu}/>
 
         <div className="content">
             <div className="App">
