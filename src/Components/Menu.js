@@ -1,7 +1,12 @@
+//import logo from '../../images/my_client.svg'
 import logo from '../brose.svg';
+import { Link, useLocation } from 'react-router-dom';
 
 function Menu(props){
-    console.log(props);
+    //console.log(props);
+
+    const location = useLocation();
+    const { pathname } = location;
 
     return <nav className="navbar navbar-expand-lg navbar-dark bg-navbar-color py-0">
         <div className="container-fluid">
@@ -12,16 +17,16 @@ function Menu(props){
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                {props.menuItems.map(menu => 
+                {props.menuItems.map(menu =>
                     ('submenu' in menu) ? 
                         (
                         <li className="nav-item dropdown">
-                            <button className="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button className={menu.submenu.find(({ to }) => to === pathname) ? "nav-link dropdown-toggle active" : "nav-link dropdown-toggle"} id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 {menu.label}
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {menu.submenu.map(submenu1 => 
-                                    <li><button className="dropdown-item">{submenu1.label}</button></li>
+                                {menu.submenu.map(submenu1 =>
+                                    <Link className={submenu1.to === pathname ? "dropdown-item active" : "dropdown-item"} to={submenu1.to}>{submenu1.label}</Link>
                                 )}
                             </ul>
                         </li>
@@ -29,7 +34,7 @@ function Menu(props){
                     :
                         (
                         <li className="nav-item">
-                            <button className="nav-link active" aria-current="page">{menu.label}</button>
+                            <Link className={menu.to === pathname ? "nav-link active" : "nav-link"} to={menu.to}>{menu.label}</Link>
                         </li>
                         )
                 )}
