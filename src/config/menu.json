@@ -1,1 +1,44 @@
-
+[
+    {
+        "label": "Home",
+        "to": "/"
+    },
+    {
+        "label": "Bikes",
+        "to": "/bikes"
+    },
+    {
+        "label": "Models",
+        "submenu": [
+            {
+                "label": "View all",
+                "to": "'/login'"
+            },
+            {
+                "label": "New Model",
+                "to": "/"
+            }
+        ]
+    },
+    {
+        "label": "Components",
+        "submenu": [
+            {
+                "label": "View all",
+                "to": "/all"
+            },
+            {
+                "label":"New Drive Unit",
+                "to": "/du"
+            },
+            {
+                "label":"New HMI",
+                "to": "/bikes"
+            },
+            {
+                "label": "New Battery",
+                "to": "/batt"
+            }
+        ]
+    }
+]
