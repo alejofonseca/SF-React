@@ -1,15 +1,16 @@
 import React from "react";
-import { useLocation, Link, NavLink } from "react-router-dom";
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { useLocation, Link, NavLink, Outlet } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Breadcrumb } from 'react-bootstrap';
 import logo from '../brose.svg';
-import menu from '../config/menu.json';
+import { menu } from "../config/menu";
+import Breadcrumbs from "../Components/Breadcrumbs";
 
 const Bikes = () => {
     const location = useLocation();
     const { pathname } = location;
     const id = location.state?.id;
 
-    //console.log(pathname);
+    console.log(pathname);
     return (
         <div className="container">
             <Navbar collapseOnSelect className="navbar" expand="lg" bg="light" variant="light">
@@ -34,6 +35,12 @@ const Bikes = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+
+            <Breadcrumbs />
+            
+            {pathname === '/bikes' && <p>This is Bikes</p>}
+
+            <Outlet />
         </div>
     );
 }

@@ -1,12 +1,11 @@
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import Breadcrumbs from "../Components/Breadcrumbs";
 
 const Login = () => {
-    const location = useLocation();
-    const id = location.state?.id;
-    console.log(id);
-    return <Navigate to="/bikes" />;
-    //return <>Login</>
+    return <>
+    {/* Los breadcrumbs que aparecen en esta página vienen de bikes (parent component) */}
+    Login
+    </>
 }
 
 export default Login;
