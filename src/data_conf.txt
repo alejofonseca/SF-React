@@ -1,0 +1,6 @@
+client_id: 3MVG9ZPHiJTk7yFzUz5aUereSYH6gUng2WLI6jnXThndSR00AJBw9t8WEgCYs0w6I1Qiat0zGTdTBcolR3vJd
+client_secret: B7E541A7CF7D425B74CE66CBB5AD14E7CDD6AF83628EEC1A9AA5E51CDD4802D8
+
+https://brose-antriebstechnik--brosedev.sandbox.my.salesforce.com/services/oauth2/token
+
+https://brose-antriebstechnik--brosedev.sandbox.my.salesforce.com/services/apexrest/acctstodisplay/s/C0ZKoOzxd5DXwZI90bqWJlPGjKoFk3eA333DGIVzb1jcuQeCH3xmiWawvwek5laf
