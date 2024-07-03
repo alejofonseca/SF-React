@@ -52,29 +52,40 @@ const OrderProduct = () => {
         fetchToken();
     }, []);
 
-    // console.log(orders);
+    //console.log(orders);
 
+    const anyKeyFilter = item => obj => {
+        //Object.values(obj).filter(e => e.includes(item));
+        return Object.values(obj);
+        //console.log(Object.values(obj));
+    };
 
-    const anyKeyFilter = item => obj => Object.values(obj).includes(item);
-    //console.log(orders.filter(anyKeyFilter('2203613')));
+    const multiFilter = order => {
+    
 
-    const result = orders.map(item => (
-        //console.log(item.OrderItems.records)
-        item.OrderItems.records.filter(anyKeyFilter('Nutmutter (C13572-104)'))
-    ));
-
-    console.log(result);
+        const orderProduct = order.OrderItems.records.filter((item) => {
+            return item.ProductName__c.toLowerCase().includes(search)
+        });
+        console.log('orderProduct:', orderProduct);
+        const valor = '8013W000007VqMsQAK';
+/*
+        return search === '' ? order : (
+            order.OrderNumber.toLowerCase().includes(search) || order.PoDate.toLowerCase().includes(search) || order.Status.toLowerCase().includes(search)
+            || orderProduct.OrderId?.includes(order.Id)
+        )
+*/
+        return orderProduct.length !== 0 ? order.Id.includes(orderProduct[0].OrderId) : null
+    };
 
     /*
-    const result = orders
-    .map(item => ({
-        ...item,
-        children: item.children?.filter(child => Object.values(child).includes('28'))
-    }))
-    console.log(result);
-    //.filter(item => item.children.length > 0)
+    const results = orders.map(order => (
+        order.OrderItems.records.filter((item) => {
+            return item.ProductName__c.toLowerCase().includes(search)
+        })
+    ));
     */
-    
+
+    //console.log(results);    
 
     return <div className="container">
         <Navbar collapseOnSelect className="navbar" expand="lg" bg="light" variant="light">
@@ -107,8 +118,10 @@ const OrderProduct = () => {
         <Form>
             <InputGroup>
                 <Form.Control 
-                onChange = {(e) => setSearch(e.target.value)}
-                placeholder='Search in orders'
+                    onChange = {
+                        (e) => setSearch(e.target.value.toLowerCase())
+                    }
+                    placeholder='Search in orders'
                 />
             </InputGroup>
         </Form>
@@ -125,18 +138,15 @@ const OrderProduct = () => {
                 </thead>
                 <tbody>
                     {
-                    
-                    /*orders.filter((item) => {
+/*
+                    orders.filter((item) => {
                         return search.toLowerCase() === '' ? item : (
                             item.OrderNumber.toLowerCase().includes(search.toLowerCase()) || item.PoDate.toLowerCase().includes(search.toLowerCase())
                         )
                     })
-                    */
+*/
 
-                    //const anyKeyFilter = item => obj => Object.values(obj).includes(item);
-
-                    orders.filter(item => obj => Object.values(obj).includes('2023-08-30'))
-                    
+                    orders.filter((item) => multiFilter(item))
                     .map((item) => (
                         <tr key={item.OrderNumber}>
                             <td><div className="d-flex position-relative"><Link>{item.OrderNumber}</Link></div></td>
