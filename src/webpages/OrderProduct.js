@@ -68,13 +68,14 @@ const OrderProduct = () => {
         });
         console.log('orderProduct:', orderProduct);
         const valor = '8013W000007VqMsQAK';
-/*
+
         return search === '' ? order : (
             order.OrderNumber.toLowerCase().includes(search) || order.PoDate.toLowerCase().includes(search) || order.Status.toLowerCase().includes(search)
-            || orderProduct.OrderId?.includes(order.Id)
+            || order.Id.includes(orderProduct[0]?.OrderId)
         )
-*/
-        return orderProduct.length !== 0 ? order.Id.includes(orderProduct[0].OrderId) : null
+
+        //return orderProduct.length !== 0 ? order.Id.includes(orderProduct[0].OrderId) : null
+        //return order.Id.includes(orderProduct[0]?.OrderId)
     };
 
     /*
