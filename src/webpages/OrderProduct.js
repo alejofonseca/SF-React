@@ -17,6 +17,7 @@ const OrderProduct = () => {
     const { pathname } = location;
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState('');
+    const [lineItems, setLineItems] = useState([]);
 
     let routeToken = 'https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/oauth2/token';
     let optionsToken = {
@@ -30,6 +31,13 @@ const OrderProduct = () => {
             client_id: '3MVG97ZwUE6kNctejR367sCoVKGsgtn4XYlYgcDVmAqGm4p3Z77UhqBM_nMEGJxu1l4E.k_EXXncs0cR4WZzN',
             client_secret: '5C549AB7F2133BD354C98ACB8F9DD9904C3C0155E151E1FE5EF1BBAFF29994EC'
         })
+    };
+
+    const resultObj = {
+        'definitions': {
+            'menu': ['OrderNumber', 'PO Date', 'Status', 'Amount'],
+            'itemsLocation': 'OrderItems.records'
+        }
     };
 
     useEffect(() => {
@@ -46,47 +54,55 @@ const OrderProduct = () => {
                 }
             };
             const data = await fetchData(routeOrders,optionsOrders);
+            
+            let myObj = [];
+            data.map(order => {
+                let orderItem = order;
+                resultObj.definitions.itemsLocation.split('.').forEach(item => {
+                    orderItem = orderItem[item] ? orderItem[item] : null;
+                });
+                myObj.push({id: order.Id, lineItems: orderItem});
+                
+                //console.log(myObj);
+                return myObj;
+            });
+            
+            //setLineItems(myObj);
+            console.log(myObj);
+            
+            
             setOrders(data);
         };
 
         fetchToken();
     }, []);
-
     //console.log(orders);
 
+
+
+    
+    
+    
+
+
     const anyKeyFilter = item => obj => {
-        //Object.values(obj).filter(e => e.includes(item));
         return Object.values(obj);
         //console.log(Object.values(obj));
     };
 
     const multiFilter = order => {
-    
-
         const orderProduct = order.OrderItems.records.filter((item) => {
             return item.ProductName__c.toLowerCase().includes(search)
         });
-        console.log('orderProduct:', orderProduct);
+        //console.log('orderProduct:', orderProduct);
         const valor = '8013W000007VqMsQAK';
 
         return search === '' ? order : (
             order.OrderNumber.toLowerCase().includes(search) || order.PoDate.toLowerCase().includes(search) || order.Status.toLowerCase().includes(search)
             || order.Id.includes(orderProduct[0]?.OrderId)
         )
-
-        //return orderProduct.length !== 0 ? order.Id.includes(orderProduct[0].OrderId) : null
-        //return order.Id.includes(orderProduct[0]?.OrderId)
     };
-
-    /*
-    const results = orders.map(order => (
-        order.OrderItems.records.filter((item) => {
-            return item.ProductName__c.toLowerCase().includes(search)
-        })
-    ));
-    */
-
-    //console.log(results);    
+    //console.log(results);
 
     return <div className="container">
         <Navbar collapseOnSelect className="navbar" expand="lg" bg="light" variant="light">
@@ -131,10 +147,14 @@ const OrderProduct = () => {
             <Table>
                 <thead>
                     <tr>
-                        <th>OrderNumber</th>
+                        {/* <th>OrderNumber</th>
                         <th>PO Date</th>
                         <th>Status</th>
-                        <th>Amount</th>
+                        <th>Amount</th> */}
+
+                        {resultObj.definitions.menu.map((title,index) => (
+                            <th key={index}>{title}</th>
+                        ))}
                     </tr>
                 </thead>
                 <tbody>
