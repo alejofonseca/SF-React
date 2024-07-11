@@ -36,7 +36,8 @@ const OrderProduct = () => {
     const resultObj = {
         'definitions': {
             'menu': ['OrderNumber', 'PO Date', 'Status', 'Amount'],
-            'itemsLocation': 'OrderItems.records'
+            'itemsLocation': 'OrderItems.records',
+            'cType': 'Input'
         }
     };
 
@@ -80,7 +81,6 @@ const OrderProduct = () => {
 
 
 
-    
     
     
 
