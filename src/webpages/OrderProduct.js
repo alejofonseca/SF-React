@@ -17,7 +17,6 @@ const OrderProduct = () => {
     const { pathname } = location;
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState('');
-    const [lineItems, setLineItems] = useState([]);
 
     let routeToken = 'https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/oauth2/token';
     let optionsToken = {
@@ -45,7 +44,7 @@ const OrderProduct = () => {
         const fetchToken = async () => {
             const auth = await fetchData(routeToken,optionsToken);
 
-            const routeOrders = 'https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/apexrest/orderproduct/s/1234/id/0011p00002DLQu7AAH';
+            const routeOrders = 'https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/apexrest/orderproduct/s/1234/id/0012400000glFyEAAU';
             const optionsOrders = {
                 method: "GET",
                 mode: "cors",
@@ -57,21 +56,19 @@ const OrderProduct = () => {
             const data = await fetchData(routeOrders,optionsOrders);
             
             let myObj = [];
-            data.map(order => {
+            for(let order of data) {
+                if (order.OrderItems === undefined) {
+                    continue;
+                }
+
                 let orderItem = order;
                 resultObj.definitions.itemsLocation.split('.').forEach(item => {
                     orderItem = orderItem[item] ? orderItem[item] : null;
                 });
                 myObj.push({id: order.Id, lineItems: orderItem});
-                
-                //console.log(myObj);
-                return myObj;
-            });
+            }
             
-            //setLineItems(myObj);
-            console.log(myObj);
-            
-            
+            //console.log(myObj);
             setOrders(data);
         };
 
@@ -81,26 +78,81 @@ const OrderProduct = () => {
 
 
 
-    
-    
-
-
     const anyKeyFilter = item => obj => {
         return Object.values(obj);
         //console.log(Object.values(obj));
     };
 
-    const multiFilter = order => {
-        const orderProduct = order.OrderItems.records.filter((item) => {
+
+const order = {OrderNumber:"1700813" ,Status: "Draft", TotalAmount: 2300, OrderItems: {records: [{product: "product1", quantity: 53}]}};
+const criteria_root = ['OrderNumber','PoDate','Status'];
+const lineitems_location = 'OrderItems.records';
+const criteria_lineitems = ['ProductName__c']; // filtrar desde antes para eliminar el location: 'OrderItems.records.ProductName__c' -> 'ProductName__c'
+
+const lineitems_location_arr = lineitems_location.split('.');
+
+
+    let orderItem = order;
+    lineitems_location.split('.').forEach(item => {
+        orderItem = orderItem[item] ? orderItem[item] : null;
+    });
+    //console.log(orderItem);
+
+    const multiFilter = (order, criteria_root) => {
+
+        let filtered_orders = [];
+
+        let orderItem = order;
+        let orderItemFinal;
+        lineitems_location_arr.forEach(item => {
+            // if Order.OrderItems.records exist - Checks the route exists
+
+            console.log('orderItem', orderItem);
+
+            
+            if(orderItem[item] !== undefined && orderItem !== null){
+                orderItem = orderItem[item] ? orderItem[item] : null;
+                orderItemFinal = orderItem;
+            }
+        });
+        
+        
+        const orderProduct = orderItemFinal !== undefined ? orderItemFinal.filter((lineitem) => {
+            for(var i=0; i<criteria_lineitems.length; i++) {
+                lineitem[criteria_lineitems[i]]?.toLowerCase().includes(search) ? filtered_orders.push(true) : filtered_orders.push(false);
+            }
+
+            return lineitem;
+        }) : null;
+        
+
+        /* org
+        const orderProduct = order.OrderItems?.records.filter((item) => {
             return item.ProductName__c.toLowerCase().includes(search)
         });
         //console.log('orderProduct:', orderProduct);
-        const valor = '8013W000007VqMsQAK';
+        //console.log(order);
+        */
+        
+        if(search === ''){
+            return order;
+        } else {
+            for(var i=0; i<criteria_root.length; i++) {
+                order[criteria_root[i]]?.toLowerCase().includes(search) ? filtered_orders.push(true) : filtered_orders.push(false);
+            }
+        }
 
+        return filtered_orders.includes(true) || (orderProduct && order.Id.includes(orderProduct[0]?.OrderId)) ? order : null;
+        
+
+
+        /*
         return search === '' ? order : (
-            order.OrderNumber.toLowerCase().includes(search) || order.PoDate.toLowerCase().includes(search) || order.Status.toLowerCase().includes(search)
-            || order.Id.includes(orderProduct[0]?.OrderId)
+            order.OrderNumber.toLowerCase().includes(search) || order?.PoDate?.toLowerCase().includes(search) || order.Status.toLowerCase().includes(search)
+            || (orderProduct && order.Id.includes(orderProduct[0]?.OrderId)) // validate orderProduct exists from line above, then gets its OrderId
         )
+        */
+        
     };
     //console.log(results);
 
@@ -167,7 +219,7 @@ const OrderProduct = () => {
                     })
 */
 
-                    orders.filter((item) => multiFilter(item))
+                    orders.filter((item) => multiFilter(item, criteria_root))
                     .map((item) => (
                         <tr key={item.OrderNumber}>
                             <td><div className="d-flex position-relative"><Link>{item.OrderNumber}</Link></div></td>
