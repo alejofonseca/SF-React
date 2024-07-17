@@ -17,6 +17,7 @@ const OrderProduct = () => {
     const { pathname } = location;
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState('');
+    const [sortField, setSortField] = useState(''); 
 
     let routeToken = 'https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/oauth2/token';
     let optionsToken = {
@@ -84,38 +85,55 @@ const OrderProduct = () => {
     };
 
 
-const order = {OrderNumber:"1700813" ,Status: "Draft", TotalAmount: 2300, OrderItems: {records: [{product: "product1", quantity: 53}]}};
+//const order = {OrderNumber:"1700813" ,Status: "Draft", TotalAmount: 2300, OrderItems: {records: [{product: "product1", quantity: 53}]}};
 const criteria_root = ['OrderNumber','PoDate','Status'];
 const lineitems_location = 'OrderItems.records';
 const criteria_lineitems = ['ProductName__c']; // filtrar desde antes para eliminar el location: 'OrderItems.records.ProductName__c' -> 'ProductName__c'
 
 const lineitems_location_arr = lineitems_location.split('.');
-
-
+/*
     let orderItem = order;
     lineitems_location.split('.').forEach(item => {
         orderItem = orderItem[item] ? orderItem[item] : null;
     });
     //console.log(orderItem);
+*/
+
+// const arr = [3, 9, 6, 1];
+// arr.sort((a, b) => a - b);
+// console.log(arr); // [1, 3, 6, 9]
+
+// https://blog.logrocket.com/creating-react-sortable-table/
+const data = [
+    { name: "ibas", age: 100 },
+    { name: "doe", age: 36 }
+];
+const data1 = [...data].sort((a, b) => {
+    console.log(a, b);
+    return (a.name < b.name ? -1 : 1)
+});
+console.log(data,data1);
+
 
     const multiFilter = (order, criteria_root) => {
 
         let filtered_orders = [];
 
         let orderItem = order;
-        let orderItemFinal;
+        let orderItemFinal = [];
         lineitems_location_arr.forEach(item => {
             // if Order.OrderItems.records exist - Checks the route exists
-
-            console.log('orderItem', orderItem);
-
-            
             if(orderItem[item] !== undefined && orderItem !== null){
                 orderItem = orderItem[item] ? orderItem[item] : null;
                 orderItemFinal = orderItem;
             }
         });
         
+        //console.log('orderItemFinal', orderItemFinal);
+
+        if(!Array.isArray(orderItemFinal) || orderItemFinal === null) {
+            return false;
+        }
         
         const orderProduct = orderItemFinal !== undefined ? orderItemFinal.filter((lineitem) => {
             for(var i=0; i<criteria_lineitems.length; i++) {
@@ -154,6 +172,18 @@ const lineitems_location_arr = lineitems_location.split('.');
         */
         
     };
+
+    const handleSortingChange = (index) => {
+        //console.log(orders);
+        setSortField(index);
+        handleSorting(index);
+    };
+
+    const handleSorting = (sortField) => {
+        console.log('without sort:', orders);
+        const sorted = [...orders].sort((a, b) => (a[sortField].toString() < b[sortField] ? -1 : 1));
+        console.log('sorted:', sorted);
+    }
     //console.log(results);
 
     return <div className="container">
@@ -205,7 +235,7 @@ const lineitems_location_arr = lineitems_location.split('.');
                         <th>Amount</th> */}
 
                         {resultObj.definitions.menu.map((title,index) => (
-                            <th key={index}>{title}</th>
+                            <th key={index} onClick={() => handleSortingChange(index)}>{title}</th>
                         ))}
                     </tr>
                 </thead>
