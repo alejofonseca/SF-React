@@ -1,6 +1,6 @@
-import React, { Children, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link, NavLink } from "react-router-dom";
-import { Navbar, Nav, NavDropdown, Container, Table, Form, InputGroup, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Container, Table, Form, InputGroup, Button } from 'react-bootstrap';
 import logo from '../brose.svg';
 import { menu } from "../config/menu";
 import { fetchData } from "../helpers/api";
@@ -17,7 +17,7 @@ const OrderProduct = () => {
     const { pathname } = location;
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState('');
-    const [sortField, setSortField] = useState(''); 
+    const [token, setToken] = useState('');
 
     let routeToken = 'https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/oauth2/token';
     let optionsToken = {
@@ -35,7 +35,7 @@ const OrderProduct = () => {
 
     const resultObj = {
         'definitions': {
-            'menu': ['OrderNumber', 'PO Date', 'Status', 'Amount'],
+            'menu': ['OrderNumber', 'PO Date', 'Status', 'Amount', ''],
             'itemsLocation': 'OrderItems.records',
             'cType': 'Input'
         }
@@ -44,6 +44,7 @@ const OrderProduct = () => {
     useEffect(() => {
         const fetchToken = async () => {
             const auth = await fetchData(routeToken,optionsToken);
+            setToken(auth.access_token);
 
             const routeOrders = 'https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/apexrest/orderproduct/s/1234/id/0012400000glFyEAAU';
             const optionsOrders = {
@@ -75,45 +76,12 @@ const OrderProduct = () => {
 
         fetchToken();
     }, []);
-    //console.log(orders);
+    //console.log(orders, token);
 
-
-
-    const anyKeyFilter = item => obj => {
-        return Object.values(obj);
-        //console.log(Object.values(obj));
-    };
-
-
-//const order = {OrderNumber:"1700813" ,Status: "Draft", TotalAmount: 2300, OrderItems: {records: [{product: "product1", quantity: 53}]}};
 const criteria_root = ['OrderNumber','PoDate','Status'];
 const lineitems_location = 'OrderItems.records';
 const criteria_lineitems = ['ProductName__c']; // filtrar desde antes para eliminar el location: 'OrderItems.records.ProductName__c' -> 'ProductName__c'
-
 const lineitems_location_arr = lineitems_location.split('.');
-/*
-    let orderItem = order;
-    lineitems_location.split('.').forEach(item => {
-        orderItem = orderItem[item] ? orderItem[item] : null;
-    });
-    //console.log(orderItem);
-*/
-
-// const arr = [3, 9, 6, 1];
-// arr.sort((a, b) => a - b);
-// console.log(arr); // [1, 3, 6, 9]
-
-// https://blog.logrocket.com/creating-react-sortable-table/
-const data = [
-    { name: "ibas", age: 100 },
-    { name: "doe", age: 36 }
-];
-const data1 = [...data].sort((a, b) => {
-    console.log(a, b);
-    return (a.name < b.name ? -1 : 1)
-});
-console.log(data,data1);
-
 
     const multiFilter = (order, criteria_root) => {
 
@@ -128,7 +96,6 @@ console.log(data,data1);
                 orderItemFinal = orderItem;
             }
         });
-        
         //console.log('orderItemFinal', orderItemFinal);
 
         if(!Array.isArray(orderItemFinal) || orderItemFinal === null) {
@@ -143,15 +110,6 @@ console.log(data,data1);
             return lineitem;
         }) : null;
         
-
-        /* org
-        const orderProduct = order.OrderItems?.records.filter((item) => {
-            return item.ProductName__c.toLowerCase().includes(search)
-        });
-        //console.log('orderProduct:', orderProduct);
-        //console.log(order);
-        */
-        
         if(search === ''){
             return order;
         } else {
@@ -161,30 +119,59 @@ console.log(data,data1);
         }
 
         return filtered_orders.includes(true) || (orderProduct && order.Id.includes(orderProduct[0]?.OrderId)) ? order : null;
-        
-
-
-        /*
-        return search === '' ? order : (
-            order.OrderNumber.toLowerCase().includes(search) || order?.PoDate?.toLowerCase().includes(search) || order.Status.toLowerCase().includes(search)
-            || (orderProduct && order.Id.includes(orderProduct[0]?.OrderId)) // validate orderProduct exists from line above, then gets its OrderId
-        )
-        */
-        
     };
-
-    const handleSortingChange = (index) => {
-        //console.log(orders);
-        setSortField(index);
-        handleSorting(index);
-    };
-
-    const handleSorting = (sortField) => {
-        console.log('without sort:', orders);
-        const sorted = [...orders].sort((a, b) => (a[sortField].toString() < b[sortField] ? -1 : 1));
-        console.log('sorted:', sorted);
-    }
     //console.log(results);
+
+    const download = async (id) => {
+        const optionsAtt = {
+            method: "GET",
+            mode: "cors",
+            headers: {
+            //    'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        };
+        
+        await fetch(`https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/data/v48.0/sobjects/Attachment/${id}/body`, optionsAtt)
+        // Retrieve its body as ReadableStream
+        .then((response) => {
+            const reader = response.body.getReader();
+            return new ReadableStream({
+                start(controller) {
+                    return pump();
+                    function pump() {
+                        return reader.read().then(({ done, value }) => {
+                            // When no more data needs to be consumed, close the stream
+                            if (done) {
+                                controller.close();
+                                return;
+                            }
+                            // Enqueue the next data chunk into our target stream
+                            controller.enqueue(value);
+                            return pump();
+                        });
+                    }
+                },
+            });
+        })
+        // Create a new response out of the stream
+        .then((stream) => new Response(stream))
+        // Create an object URL for the response
+        .then((response) => response.blob())
+        .then((blob) => URL.createObjectURL(blob)) //original
+        // Update image
+        .then((url) => {
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'file_'+Date.now()+'.pdf')
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+        })
+        .catch((err) => console.error(err));
+        
+        //console.log(data);
+    };
 
     return <div className="container">
         <Navbar collapseOnSelect className="navbar" expand="lg" bg="light" variant="light">
@@ -235,27 +222,28 @@ console.log(data,data1);
                         <th>Amount</th> */}
 
                         {resultObj.definitions.menu.map((title,index) => (
-                            <th key={index} onClick={() => handleSortingChange(index)}>{title}</th>
+                            <th key={index}>{title}</th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {
-/*
-                    orders.filter((item) => {
-                        return search.toLowerCase() === '' ? item : (
-                            item.OrderNumber.toLowerCase().includes(search.toLowerCase()) || item.PoDate.toLowerCase().includes(search.toLowerCase())
-                        )
-                    })
-*/
-
-                    orders.filter((item) => multiFilter(item, criteria_root))
+                    {orders.filter((item) => multiFilter(item, criteria_root))
                     .map((item) => (
                         <tr key={item.OrderNumber}>
-                            <td><div className="d-flex position-relative"><Link>{item.OrderNumber}</Link></div></td>
+                            <td><div className=""><Link>{item.OrderNumber}</Link></div></td>
                             <td><div className="">{item.PoDate}</div></td>
                             <td><div className="">{item.Status}</div></td>
-                            <td><div className="">{item.TotalAmount}</div></td>
+                            <td><div className="">{item.TotalAmount.toLocaleString('en-US', {minimumFractionDigits: 2, style: "currency", currency: "EUR"})}</div></td>
+                            <td><div className="">
+                                {item.Attachments?.records[0].Id !== undefined &&
+                                <Button type="button" className="btn btn-light btn-sm" style={{'--bs-btn-padding-y': '.13rem', '--bs-btn-padding-x': '.3rem'}} onClick={(() => download(item.Attachments.records[0].Id))}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-download" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                    </svg>
+                                </Button>
+                                }
+                            </div></td>
                         </tr>
                     ))}
                 </tbody>
