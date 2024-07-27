@@ -129,11 +129,13 @@ const lineitems_location_arr = lineitems_location.split('.');
             mode: "cors",
             headers: {
             //    'Content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
+            //    'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer 00DQy000008yW0P!AQEAQKEwDDubC8fGONFm_CZa2OQp3XeoD3i55DwsRwaukCaNpOLXoz6nDH4DuIfSqdmjxdi0iJpzEsgX23ct3Utm3NghEi_z`
             }
         };
         
-        await fetch(`https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/data/v48.0/sobjects/Attachment/${id}/body`, optionsAtt)
+        //await fetch(`https://brose-antriebstechnik--qafc.sandbox.my.salesforce.com/services/data/v48.0/sobjects/Attachment/${id}/body`, optionsAtt)
+        await fetch(`https://mindful-otter-e85qhb-dev-ed.trailblaze.my.salesforce.com/services/data/v61.0/connect/files/069Qy0000059d8vIAA/content`, optionsAtt)
         // Retrieve its body as ReadableStream
         .then((response) => {
             const reader = response.body.getReader();
