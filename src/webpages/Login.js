@@ -14,7 +14,14 @@ const Login = () => {
 
     const uploadFiles = (data) => {
         setStatus(STATUS_UPLOADING);
-        console.log(data);
+        fetch('/contact', {
+            method: 'post',
+            body: data,
+        })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err))
+        .finally(() => setStatus(STATUS_IDLE))
     }
 
     const packFiles = (files)=> {
