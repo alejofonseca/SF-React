@@ -1,11 +1,59 @@
-import React from "react";
-import Breadcrumbs from "../Components/Breadcrumbs";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
-const Login = (props) => {
+const Login = () => {
+
+    const location = useLocation();
+    const id = location.pathname.split('/')[2];
+
+    const STATUS_IDLE = 0;
+    const STATUS_UPLOADING = 1;
+
+    const [files, setFiles] = useState([]);
+    const [status, setStatus] = useState(STATUS_IDLE);
+
+    const uploadFiles = (data) => {
+        setStatus(STATUS_UPLOADING);
+        console.log(data);
+    }
+
+    const packFiles = (files)=> {
+        const data = new FormData();
+        [...files].forEach((file, i) => {
+            data.append(`file-${i}`, file, file.name)
+        });
+        return data;
+    }
+
+    const handleUploadClick = () => {
+        if (files.length) {
+            const data = packFiles(files);
+            uploadFiles(data);
+        }
+    }
+
+    const renderFileList = () => (<ul className="list-group list-group-flush my-1">
+        {[...files].map((f, i) => (
+            <li key={i} className="list-group-item small py-1">{f.name}</li>
+        ))}
+    </ul>);
+
+    const getButtonStatusText = () => (
+        (status === STATUS_IDLE) ? 'Send' : 'Sending...'
+    );
+
     return <>
-    {/* Los breadcrumbs que aparecen en esta página vienen de bikes (parent component) */}
-    Login <br />
-    {props.data.title}
+    Login bike OEM <br /><br />
+
+    <div>
+        <input type="file" name="file" multiple onChange={(e) => setFiles(e.target.files)} className="form-control form-control-sm" />
+        {renderFileList()}
+        <br />
+        <button onClick={handleUploadClick} disabled={status === STATUS_UPLOADING}>
+            {getButtonStatusText()}
+        </button>
+    </div>
+    
     </>
 }
 
