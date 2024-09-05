@@ -10,7 +10,7 @@ const Bikes = () => {
     const { pathname } = location;
     const id = location.state?.id;
 
-    console.log(pathname);
+    //console.log(pathname);
     return (
         <div className="container">
             <Navbar collapseOnSelect className="navbar" expand="lg" bg="light" variant="light">
@@ -36,7 +36,7 @@ const Bikes = () => {
                 </Navbar.Collapse>
             </Navbar>
 
-            <Breadcrumbs />
+            {/* <Breadcrumbs /> */}
             
             {pathname === '/bikes' && <p>This is Bikes</p>}
 
