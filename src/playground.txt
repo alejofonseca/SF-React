@@ -4,3 +4,5 @@ Pwd: Alejofonsec@2
 tk: 00DQy000008yW0P!AQEAQKEwDDubC8fGONFm_CZa2OQp3XeoD3i55DwsRwaukCaNpOLXoz6nDH4DuIfSqdmjxdi0iJpzEsgX23ct3Utm3NghEi_z
 
 https://github.com/issaafalkattan/React-Landing-Page-Template
+
+export to CSV: https://dev.to/graciesharma/implementing-csv-data-export-in-react-without-external-libraries-3030
