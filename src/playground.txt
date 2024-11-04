@@ -6,3 +6,17 @@ tk: 00DQy000008yW0P!AQEAQKEwDDubC8fGONFm_CZa2OQp3XeoD3i55DwsRwaukCaNpOLXoz6nDH4D
 https://github.com/issaafalkattan/React-Landing-Page-Template
 
 export to CSV: https://dev.to/graciesharma/implementing-csv-data-export-in-react-without-external-libraries-3030
+
+
+---
+
+Buttons:
+home, about, services/products, contact us
+
+Title for about:
+- What we do or what drives us -> an intro with a big title like this. See https://www.startupcampusgermany.com/about/. 
+Frases para el About:
+- Your professional partner in customer data management.
+- Our mission is to empower your customers with their real time data.
+
+---
