@@ -5,6 +5,7 @@ import logo from '../brose.svg';
 import { menu } from "../config/menu";
 import { fetchData } from "../helpers/api";
 import download_light from '../images/download_light.svg';
+import ExportCSV from "../Components/ExportCSV";
 
 /**
  * This app consumes the services exposed on QAFC apex class GetOrderProducts. The connection is done through the
@@ -77,7 +78,8 @@ const OrderProduct = () => {
 
         fetchToken();
     }, []);
-    //console.log(orders, token);
+    
+    //console.log(orders);
 
 const criteria_root = ['OrderNumber','PoDate','Status'];
 const lineitems_location = 'OrderItems.records';
@@ -202,6 +204,8 @@ const lineitems_location_arr = lineitems_location.split('.');
 
         <br />
         <h3>Orders</h3>
+        <ExportCSV data={orders} />
+        <br />
         <br />
 
         <Form>
