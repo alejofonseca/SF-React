@@ -114,25 +114,29 @@ const lineitems_location_arr = lineitems_location.split('.');
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
-
-        <br />
-        <h3>Invoices</h3>
-        <br />
-
-        <Form>
-            <InputGroup>
-                <Form.Control 
-                    onChange = {
-                        (e) => setSearch(e.target.value.toLowerCase())
-                    }
-                    placeholder='Search in invoices'
-                />
-            </InputGroup>
-        </Form>
         <br />
         
         <Container>
-            <Table className="table table-hover">
+            <Form>
+                <div className="row">
+                    <div className="col-md-8">
+                        <h3>Invoices</h3>
+                    </div>
+                    <div className="col-md-4">
+                        <InputGroup>
+                            <Form.Control 
+                                className="float-end text-end form-control-sm"
+                                onChange = {
+                                    (e) => setSearch(e.target.value.toLowerCase())
+                                }
+                                placeholder='Search in invoices'
+                            />
+                        </InputGroup>
+                    </div>
+                </div>
+            </Form>
+
+            <Table className="table table-hover table-sm">
                 <thead>
                     <tr>
                         {resultObj.definitions.menu.map((title,index) => (
@@ -142,16 +146,28 @@ const lineitems_location_arr = lineitems_location.split('.');
                 </thead>
                 <tbody>
                     {data.filter((item) => multiFilter(item, criteria_root))
-                    .map((item) => (
-                        <tr key={item.InvoiceNumber} className={item.Status==='Overdue' ? "table-danger" : null}>
+                    .map((item) => {
+                        let badge_class;
+                        switch(item.Status) {
+                            case 'Overdue':
+                                badge_class = 'badge rounded-pill bg-danger';
+                                break;
+                            case 'Paid':
+                                badge_class = 'badge rounded-pill bg-success';
+                                break;
+                            default:
+                                badge_class = 'badge rounded-pill bg-light text-dark';
+                                break;
+                        }
+                        return <tr key={item.InvoiceNumber} className={item.Status==='Overdue' ? null : null}>
                             <td><div className="">{item.InvoiceNumber}</div></td>
                             <td><div className="">{item.Date}</div></td>
                             <td><div className="">{item.DueDate}</div></td>
-                            <td><div className=""><i className="bi bi-flag"></i>{item.Status}</div></td>
+                            <td><div className={badge_class}><i className="bi bi-flag"></i>{item.Status}</div></td>
                             <td><div className="" style={{"textAlign": "right"}}>{item.Total.toLocaleString('en-US', {minimumFractionDigits: 2, style: "currency", currency: "USD"})}</div></td>
                             <td><div className="" style={{"textAlign": "right"}}>{item.OutstandingAmount.toLocaleString('en-US', {minimumFractionDigits: 2, style: "currency", currency: "USD"})}</div></td>
                         </tr>
-                    ))}
+                    })}
                 </tbody>
             </Table>
         </Container>
