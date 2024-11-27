@@ -17,6 +17,8 @@ const BikeList = () => {
     const [orders, setOrders] = useState([]);
     const [search, setSearch] = useState('');
 
+console.log(navigator.language.split("-")[0]);
+
     const resultObj = {
         'definitions': {
             'menu': ['Invoice Number', 'Date', 'Due Date', 'Status', 'Total','Outstanding']
