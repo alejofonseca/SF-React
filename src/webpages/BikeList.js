@@ -18,6 +18,13 @@ const BikeList = () => {
     const [search, setSearch] = useState('');
 
 console.log(navigator.language.split("-")[0]);
+var tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate()+1);
+console.log(tomorrow, tomorrow.toUTCString());
+const name = 'test_cookie2';
+const value = 'es';
+//document.cookie = `${name}=${value}; expires=${tomorrow}; path=/`;
+document.cookie = `${name}=${value}; expires=${tomorrow}; path=/`;
 
     const resultObj = {
         'definitions': {
