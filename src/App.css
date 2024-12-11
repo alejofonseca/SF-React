@@ -118,17 +118,38 @@ th {
   
 }
 
-header {
+
+
+.background-container{
+  width: 100%;
+  height: 400px;
   position: relative;
-  text-align: center;
-  padding-top: 25px;
 }
-header img.background {
+.middle-shadow{
+  width: 100%;
+  height: 100%;            
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  width: 99%;
-  opacity:0.3;
+  -webkit-box-shadow: 0 4px 6px -6px #4d4d4d;
+  -moz-box-shadow: 0 4px 6px -6px #464646;
+  box-shadow: 0 4px 6px -6px #696969;
+  z-index: -1;
+}
+.wallpaper{
+  background: url(images/photo.jpg) center center no-repeat;
+  background-size: contain;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  margin-top: 300px;
+  height: 400px;
+  background-size: 800px; /*this line ensures that the image width is 800px no matter the size of the uploaded image*/
+  -o-background-size: contain;
+
+  /* background: linear-gradient(to right, #54b4d5 0%, #3677b4 100%); */
+  /* filter: brightness(50%); */
+  opacity: 1;
+}
+.middle-shadow.top-box{
+  background: linear-gradient(in oklab, rgb(252, 253, 255), rgb(243, 243, 243));
 }
