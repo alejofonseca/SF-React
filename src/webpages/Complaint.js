@@ -6,12 +6,20 @@ import { useLocation, Link, NavLink } from "react-router-dom";
 
 import del_icon from "../images/red-delete.svg";
 import files_icon from "../images/files.svg";
+import photo from "../images/photo.jpg";
+import photo1 from "../images/photo1.jpg";
+import photo2 from "../images/photo2.jpg";
+import photo3 from "../images/photo3.jpg";
+import BackgoundImage from "../Components/BackgroundImage";
 
 const Complaint = (props) => {
     const [files, setFiles] = useState([]);
     const [errorMessage, setErrorMessage] = useState();
     const [message, setMessage] = useState();
     const inputFile = useRef(null);
+
+    const location = useLocation();
+    const { pathname } = location;
 
     const uploadFiles = (data) => {
         // mutate({route: '/api/content/contact', jsonArray: data, method: 'post', type: 'file'}, {
@@ -125,62 +133,116 @@ const Complaint = (props) => {
     const fileInputRef = React.createRef();
     let a = <p>No images</p>;
 
+    /**
+     * testing await for proimise resolution
+     */
+    const longTime = async () => {
+        return await new Promise(function(resolve) {
+            setTimeout(function() {
+              console.log('done resolve');
+              resolve(true);
+            }.bind(this), 2000);
+        })
+    };
+
+    const execTest = async () => {
+        console.log('antes');
+        //longTime().then(res => console.log('después', res));
+        const res = await longTime();
+        console.log('después', res);
+    }
+
+    // execution
+    execTest();
+    console.log('final');
+
+    /********** end of testing **********/
+
     return <>
-    <div className="row">
-        <div className="col-3">
-            <div className="card bg-light mt-2 mb-4">
-                <div className="card-header">
-                    <img alt="remove" src={files_icon} width={20} /> Files
-                </div>
-                <div className="card-body ctable-full">
-                    <p className="">{"props.config.metadata.message"}</p>
+    <Navbar collapseOnSelect className="navbar" expand="lg" bg="light" variant="light">
+        <Navbar.Brand className="navbar-brand bg-myRed" as={Link} to ="/"><img src={logo} alt="logo" /></Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='navbar-nav ms-auto' activeKey={pathname}>
+                {menu.map(item => 
+                    ('submenu' in item) ? 
+                        (
+                        <NavDropdown title={item.label} key={item.label} active={item.submenu.find(({ to }) => to === pathname)}>
+                            {item.submenu.map(submenu1 =>
+                                <NavDropdown.Item className="nav-link" href={submenu1.to} key={submenu1.label} active={submenu1.to===pathname}>{submenu1.label}</NavDropdown.Item>
+                            )}
+                        </NavDropdown>
+                        )
+                    :
+                        (
+                        <NavLink className="nav-link" to={item.to} key={item.label}>{item.label}</NavLink>
+                        )
+                )}
+            </Nav>
+        </Navbar.Collapse>
+    </Navbar>
 
-                    <div className="row">
-                        {<div className='col-12'>
-                            
-                            {/* <button type="file" name="file" multiple
-                                onChange={(e) => handleFileChange(e)} 
-                                className="form-control form-control-sm" 
-                                ref={inputFile}
+    <div style={{backgroundColor: "transparent", height: "100%"}}>
+        <div className="background-container">
+            <div className="container" style={{backgroundColor: "transparent"}}>Brose</div>
+
+            <div className="middle-shadow top-box"></div>
+            <div className="middle-shadow wallpaper" style={{backgroundImage:`url(${photo3})`, backgroundColor: "transparent"}}></div>
+        </div>
+        hola
+    </div>
+    
+
+    {/* <div className="container">
+        <div>
+        <div className="row">
+            <div className="col-lg-4">
+                <div className="card bg-light mt-2 mb-4">
+                    <div className="card-header">
+                        <img alt="remove" src={files_icon} width={20} /> Files
+                    </div>
+                    <div className="card-body ctable-full">
+                        <p className="">{"props.config.metadata.message"}</p>
+
+                        <div className="row">
+                            {<div className='col-12'>
+
+                            <div>
+                                <button type="button" onClick={() => fileInputRef.current.click()} className="form-control form-control-sm">
+                                    <i className="bi bi-upload"></i> Select file (pdf, jpeg, jpg, png)
+                                </button>
+                                <input
+                                type="file" name="file" multiple
                                 accept="application/pdf, image/jpeg, image/png, image/jpg"
-                            >
-                                <i className="bi bi-upload"></i> Upload the files
-                            </button> */}
+                                ref={fileInputRef}
+                                onChange={(e) => handleFileChange(e)}
+                                hidden
+                                />
+                                {a}
+                            </div>
 
-                        <div>
-                            <button type="button" onClick={() => fileInputRef.current.click()} className="form-control form-control-sm">
-                                <i className="bi bi-upload"></i> Select file (pdf, jpeg, jpg, png)
-                            </button>
-                            <input
-                            type="file" name="file" multiple
-                            accept="application/pdf, image/jpeg, image/png, image/jpg"
-                            ref={fileInputRef}
-                            onChange={(e) => handleFileChange(e)}
-                            hidden
-                            />
-                            {a}
-                        </div>
+                                {renderFileList()}
+                                {renderError()}
+                            </div>}
 
-                            {renderFileList()}
-                            {renderError()}
-                        </div>}
-
-                        {<div className='col-12'>
-                            <textarea type="text" name="client_message" rows="4" className="form-control form-control-sm mb-2"
-                                placeholder={"props.config.metadata.textarea_placeholder"} 
-                                value={message}
-                                onChange={handleMessageChange}
-                            />
-                        </div>}
-                        
-                        <div className='col-12 mt-1'>
-                            <a className="btn btn-primary btn-sm" onClick={handleUploadClick}>{getButtonStatusText()}</a>
+                            {<div className='col-12'>
+                                <textarea type="text" name="client_message" rows="4" className="form-control form-control-sm mb-2"
+                                    placeholder={"props.config.metadata.textarea_placeholder"} 
+                                    value={message}
+                                    onChange={handleMessageChange}
+                                />
+                            </div>}
+                            
+                            <div className='col-12 mt-1'>
+                                <a className="btn btn-primary btn-sm" onClick={handleUploadClick}>{getButtonStatusText()}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+    </div> */}
     </>
 }
 
