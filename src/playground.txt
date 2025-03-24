@@ -20,3 +20,16 @@ Frases para el About:
 - Our mission is to empower your customers with their real time data.
 
 ---
+
+Contradicciones comunes en B2B - Parte I: "Ofrecemos un eficiente servicio al cliente". Realidad: Servicio bastante ineficiente. La eficiencia en el servicio al no se mide por la cantidad de agentes disponibles para responder las solicitudes de los clientes, ni por la cantidad de respuestas enviadas. La eficiencia realmente se mide por:
+
+- El tiempo de respuesta: El tiempo que tarda el cliente en recibir una respuesta.
+- El tiempo de resolución: El tiempo que tarda la solicitud en ser resuelta.
+- El costo por interacción: Costo promedio de cada interacción. Crucial para la eficiencia operativa.
+- La capacidad de escalabilidad: La habilidad para manejar un aumento en el volumen de consultas.
+- Puntaje neto de promoción (NPS): La lealtad del cliente y su disposición a recomendar el servicio.
+
+Una estrategia eficiente que aumenta la productividad del equipo y evita frustraciones para los clientes consiste en asignar a los agentes las solicitudes complejas que realmente requieren la inteligencia humana, y dejar aquellas consultas redundantes y básicas a la tecnología.
+
+---
+
