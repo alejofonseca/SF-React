@@ -21,7 +21,7 @@ Frases para el About:
 
 ---
 
-Contradicciones comunes en B2B - Parte I: "Ofrecemos un eficiente servicio al cliente". Realidad: Servicio bastante ineficiente. La eficiencia en el servicio al no se mide por la cantidad de agentes disponibles para responder las solicitudes de los clientes, ni por la cantidad de respuestas enviadas. La eficiencia realmente se mide por:
+Frustraciones comunes en B2B - Parte I: "Ofrecemos un eficiente servicio al cliente". Realidad: Servicio bastante ineficiente. La eficiencia en el servicio al no se mide por la cantidad de agentes disponibles para responder las solicitudes de los clientes, ni por la cantidad de respuestas enviadas. La eficiencia realmente se mide por:
 
 - El tiempo de respuesta: El tiempo que tarda el cliente en recibir una respuesta.
 - El tiempo de resolución: El tiempo que tarda la solicitud en ser resuelta.
@@ -30,6 +30,12 @@ Contradicciones comunes en B2B - Parte I: "Ofrecemos un eficiente servicio al cl
 - Puntaje neto de promoción (NPS): La lealtad del cliente y su disposición a recomendar el servicio.
 
 Una estrategia eficiente que aumenta la productividad del equipo y evita frustraciones para los clientes consiste en asignar a los agentes las solicitudes complejas que realmente requieren la inteligencia humana, y dejar aquellas consultas redundantes y básicas a la tecnología.
+
+---
+
+Frustraciones comunes en B2B - Parte II: "Somos una empresa digital, puedes crear tu cotización en nuestro sitio web". Realidad: El formulario de cotización envía un email interno que alguien debe leer, interpretar y manualmente ingresar en el CRM, campo por campo.
+
+Generalmente, la tecnología instalada permite la integración de datos entre fuentes externas y los diferentes CRM or ERP. Una vez los líderes de servicio al cliente descubren esto, aparecen las grandes ideas de innovación.
 
 ---
 
