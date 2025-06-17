@@ -81,6 +81,10 @@ Como clientes, estamos dispuestos a buscar nuestras propias respuestas, siempre 
 
 ¿Tu empresa está preparada para ese nivel de autonomía y agilidad?
 
+---
+
+Video: Apps Script Sheets API JSON data to Spreadsheet as Object Filter Data: https://www.youtube.com/watch?v=UIGZKHaEJ30
+
 #CustomerExperience #AtencionAlCliente #Digitalización #CX #TransformaciónDigital #B2B
 
 ---
