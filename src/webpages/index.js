@@ -9,6 +9,10 @@ import Bikes from "./Bikes";
 import FirstSpirit from "./FirstSpirit";
 import OrderProduct from "./OrderProduct";
 import Dynamic from "./Dynamic";
+import OrderTable from "./OrderTable";
+import BikeList from "./BikeList";
+import Complaint from "./Complaint";
+import QrCode from "./QrCode";
 
 const Webpages = () => {
     return (
@@ -23,6 +27,10 @@ const Webpages = () => {
                     <Route path=":bikeId" element={<Login />} />
                 </Route>
                 <Route path="/dynamic" element={<Dynamic />} />
+                <Route path="/table" element={<OrderTable />} />
+                <Route path="/bikelist" element={<BikeList />} />
+                <Route path="/complaint" element={<Complaint />} />
+                <Route path="/qrcode" element={<QrCode />} />
             </Routes>
         </BrowserRouter>
     )
