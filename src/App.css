@@ -153,3 +153,56 @@ th {
 .middle-shadow.top-box{
   background: linear-gradient(in oklab, rgb(252, 253, 255), rgb(243, 243, 243));
 }
+
+
+.qr-code{
+  background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(images/bg_qr.jpg) no-repeat;
+  background-size: cover;
+  color: #4d4d4d;
+}
+
+.qr-code-name{
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.qr-code-role{
+  margin-top: -8px;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+.qr-code-contact{
+  margin-top: 7px;
+  font-size: 0.85em;
+  font-weight: 200;
+  padding-bottom: 10px;
+}
+
+.qr-code-pitch{
+  margin-top: 0px;
+  padding: 30px;
+  font-size: 1.7em;
+  font-weight: 500;
+  color: #276bb9;
+}
+
+.qr-code-pitc-sub{
+  margin-top: 0px;
+  padding: 0px 15px 0 15px;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #5f5f5f;
+}
+
+.qr-code-hr{
+  margin: 2rem 3rem 2rem 3rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.qr-code-hr2{
+  margin: 2rem 8rem 2rem 8rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
