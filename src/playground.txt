@@ -87,3 +87,15 @@ Como clientes, estamos dispuestos a buscar nuestras propias respuestas, siempre 
 Video: Apps Script Sheets API JSON data to Spreadsheet as Object Filter Data: https://www.youtube.com/watch?v=UIGZKHaEJ30
 
 ---
+
+Windows Anmeldekennung: bat00105
+Passwort für erstmalige Anmeldung: 4@Xocc8rE$Qq
+Account Ablaufdatum: 31.12.9999
+
+
+Hinweis: Die persönlichen User Einstellungen imBrose-Address-Informationsystem (BAI) müssen vom Anwender selbst
+verwaltet werden.
+
+http://bai.brose.net/
+
+---
