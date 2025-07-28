@@ -99,3 +99,23 @@ verwaltet werden.
 http://bai.brose.net/
 
 ---
+
+Agregar a documentación:
+
+- Change lead source list.
+- Lead Status needed adjustment as well.
+- Created a Partner text field for those leads who come via Partner Referral.
+- Created the Score number field. The "grade" will be replaced with current field "Rate" to establish the likelihood (kind of %) of converting to account. The combination of Score and Rate will ensure only high-quality leads are passed on down to the pipeline => Higher rate (hot) and higher Score (10 is max).
+- Created No. of Clients, numeric, no decimal.
+- Added the reminder to the Task layout and to the Global Action (in setup) -> New task -> Layout, so that the reminder shows in the quick new task window.
+- Created the formula field "Interesting" which will contain the results of combining Score and Rating. This result is displayed as a red, yellow, green bulb using a formula on this text formula field. The way to attach the images to the field is:
+1. Go to files -> Libraries (on the left).
+2. Create a library folder.
+3. Upload the 3 images there.
+4. Open the first image, right click and select "copy link".
+5. Paste the link to the formula, starting from "/sfc..." like this: IMAGE("/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Png&versionId=0689Q00000A4KYh&operationContext=CHATTER&contentId=05T9Q00000M7IDF","Green").
+6. Repeat for the other 2 images.
+Now the field should display any of the 3 images.
+
+---
+
