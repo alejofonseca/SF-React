@@ -21,69 +21,6 @@ Frases para el About:
 
 ---
 
-Frustraciones comunes en B2B - Parte I: "Ofrecemos un eficiente servicio al cliente". Realidad: Servicio bastante ineficiente. La eficiencia en el servicio al no se mide por la cantidad de agentes disponibles para responder las solicitudes de los clientes, ni por la cantidad de respuestas enviadas. La eficiencia realmente se mide por:
-
-- El tiempo de respuesta: El tiempo que tarda el cliente en recibir una respuesta.
-- El tiempo de resolución: El tiempo que tarda la solicitud en ser resuelta.
-- El costo por interacción: Costo promedio de cada interacción. Crucial para la eficiencia operativa.
-- La capacidad de escalabilidad: La habilidad para manejar un aumento en el volumen de consultas.
-- Puntaje neto de promoción (NPS): La lealtad del cliente y su disposición a recomendar el servicio.
-
-Una estrategia eficiente que aumenta la productividad del equipo y evita frustraciones para los clientes consiste en asignar a los agentes las solicitudes complejas que realmente requieren la inteligencia humana, y dejar aquellas consultas redundantes y básicas a la tecnología.
-
----
-
-Frustraciones comunes en B2B - Parte II: "Somos una empresa digital, puedes crear tu cotización en nuestro sitio web". Realidad: El formulario de cotización envía un email interno que alguien debe leer, interpretar y manualmente ingresar en el CRM, campo por campo.
-
-Generalmente, la tecnología instalada permite la integración de datos entre fuentes externas y los diferentes CRM or ERP. Una vez los líderes de servicio al cliente descubren esto, aparecen las grandes ideas de innovación.
-
----
-
-Frustraciones en B2B - Parte III: "Nuestro proceso de ventas es estructurado y está optimizado". Realidad: Es un proceso más reactivo que estratégico, el equipo de ventas no realiza la trazabilidad adecuada de los negocios, y depende en gran medida herramientas personales o de la memoria de sus representantes.
-
-✅ Los procesos de ventas se pueden optimizar fácilmente con la tecnología instalada, por ejemplo, abriendo un canal seguro para que los clientes consulten la información de sus pedidos. Te cuento cómo: https://bit.ly/my-client
-
-#customerservice #servicioalcliente #sales #IT #customerexperience
-
----
-
-Frustraciones en B2B - Parte IV: "Estamos en la onda de los datos y somos una 'data-driven company'". Realidad: Los datos están aislados en distintas aplicaciones, los dashboards no se utilizan o no reflejan información precisa, las decisiones aún se toman con base en presentimientos y no en conocimiento.
-
-✅ La ciencia de datos te permite potencializar tu negocio solo si utilizas adecuadamente la información que tienes en tus bases de datos. Si sientes que tu competencia va siempre un paso adelante en este sentido, puede ser porque ellos ya están en la onda de los datos. Aquí te muestro cómo lo hacen: https://bit.ly/my-client
-
-#customerservice #servicioalcliente #sales #IT #customerexperience
-
----
-
-Frustraciones en B2B - Parte V: "Contamos con sistemas totalmente integrados". Realidad: Las herramientas dependen de integraciones manuales como transferencias de archivos o diligenciamiento manual de campos y tablas, lo que genera inconsistencias en los datos y trabajo extra para el equipo.
-
-✅ Con la tecnología que ya tienes, podrías integrar los datos de tus clientes en un solo lugar, mejorando su experiencia y disminuyendo costos administrativos. Te muestro cómo lograrlo: https://bit.ly/my-client
-
-#customerservice #servicioalcliente #sales #IT #customerexperience
-
----
-
-Recuerda que la tecnología potencia al factor humano, no lo reemplaza. En el mundo B2B cada interacción con los clientes cuenta, por lo que invertir en tecnología para mejorar su experiencia es estratégico:
-
-✅ Datos en tiempo real.
-✅ Plataformas integradas para una experiencia fluida.
-
-El servicio al cliente excepcional no sucede por accidente: se diseña, se mide y se mejora con tecnología.
-
-#CustomerExperience #B2B #Tecnología #AtenciónAlCliente #TransformaciónDigital
-
----
-
-Hoy, el éxito se mide en velocidad.
-Como clientes, estamos dispuestos a buscar nuestras propias respuestas, siempre que el proceso sea rápido, claro y disponible 24/7.
-
-💡 La experiencia del cliente ya no depende solo de quién responde, sino de qué tan rápido y qué tan fácil es obtener esa respuesta.
-
-¿Tu empresa está preparada para ese nivel de autonomía y agilidad?
-#CustomerExperience #AtencionAlCliente #Digitalización #CX #TransformaciónDigital #B2B
-
----
-
 Video: Apps Script Sheets API JSON data to Spreadsheet as Object Filter Data: https://www.youtube.com/watch?v=UIGZKHaEJ30
 
 ---
@@ -116,6 +53,43 @@ Agregar a documentación:
 5. Paste the link to the formula, starting from "/sfc..." like this: IMAGE("/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Png&versionId=0689Q00000A4KYh&operationContext=CHATTER&contentId=05T9Q00000M7IDF","Green").
 6. Repeat for the other 2 images.
 Now the field should display any of the 3 images.
+
+---
+
+🔥 1. Optimiza tu perfil para atraer, no vender
+Antes de tocar a nadie:
+Que tu perfil diga claramente cómo ayudas a tus clientes (no solo lo que haces).
+Usa tu titular para hablar de valor: "Ayudo a empresas SaaS a crecer sus ventas mediante estrategias outbound de alto impacto".
+Ten contenido reciente o compartido que demuestre autoridad.
+
+👀 2. Interactúa antes de conectar
+Este es el “calentamiento” previo:
+Comenta sus publicaciones con valor real (no un simple “Excelente post”).
+Dale like a varios contenidos (de forma dosificada).
+Si publicó algo relevante, responde con una experiencia propia o pregunta.
+Ejemplo de comentario estratégico:
+"Totalmente de acuerdo, nosotros también vimos ese cambio al implementar X. ¿Ustedes lo notaron más en ventas o en operaciones?"
+Eso te pone en su radar sin ser invasivo.
+
+👥 3. Conexión con contexto
+Después de interactuar, mándales una solicitud de conexión sin vender todavía.
+Ejemplo de nota para conectar:
+“Hola [nombre], vi tu post sobre [tema] y me pareció muy atinado. Me encantaría seguir aprendiendo de lo que compartes. Un saludo.”
+No vendas aún. Solo conecta.
+
+🧠 4. Publica contenido relevante para tu prospecto
+Mientras haces ese acercamiento, publica o comparte contenido alineado a sus dolores. Si comentan o reaccionan, se abre la puerta.
+También puedes mencionar algo que sabes que les interesa:
+“Hoy hablaba con una empresa [tipo de cliente de tu prospecto] sobre cómo están acortando su ciclo de ventas. A veces lo simple hace toda la diferencia.”
+Indirectamente, estás mostrando que entiendes su mundo.
+
+📬 5. Ahora sí, mensaje cálido
+Una vez que ya hubo interacción:
+Se breve.
+Personaliza.
+NO vendas directo.
+Ejemplo:
+“Hola [nombre], gracias por aceptar. He estado siguiendo tu contenido y me llamó la atención lo que mencionaste sobre [X]. Trabajo con empresas similares a [su empresa] para [beneficio]. Si algún día tiene sentido explorarlo, encantado de conversar. Mientras tanto, te sigo leyendo.”
 
 ---
 
